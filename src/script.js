@@ -1,9 +1,10 @@
-import ButtonHandler from "./buttons.js";
+import ButtonClickHandler from "./buttons.js";
 
 function setupCalculatorButtonFunctionality(event) {
+  const id = event.target.id;
   const type = event.target.className;
   const value = event.target.innerHTML;
-  new ButtonHandler(type, value);
+  new ButtonClickHandler(id, type, value);
 }
 
 function setupClickListener(calculatorButton) {

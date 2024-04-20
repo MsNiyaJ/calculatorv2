@@ -3,6 +3,12 @@ class Calculator {
   secondNumber = 0;
   operation = null;
 
+  resetEquation() {
+    this.firstNumber = 0;
+    this.secondNumber = 0;
+    this.operation = null;
+  }
+
   setFirstNumber(num) {
     this.firstNumber = Number(num);
   }

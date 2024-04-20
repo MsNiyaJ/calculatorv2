@@ -44,7 +44,7 @@ class Percent {
 export const operations = {
   add: new Add(),
   subtract: new Subtract(),
-  multiplay: new Multiply(),
+  multiply: new Multiply(),
   divide: new Divide(),
   squareRoot: new SquareRoot(),
   negate: new Negate(),

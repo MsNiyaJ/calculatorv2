@@ -1,75 +1,85 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-body{
-    background-color: cadetblue;
+body {
+  background-color: cadetblue;
 }
 
-#calculator-container{
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#calculator-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#calculator{
-    padding: 10px;
-    background-color: rgb(223, 224, 224);
-    min-width: 400px;
-    height: 500px;
-    border-radius: 5px 5px 20px 20px;
-    box-shadow: 0 4px 8px 3px darkslategrey;
+#calculator {
+  padding: 10px;
+  background-color: rgb(223, 224, 224);
+  min-width: 400px;
+  height: 500px;
+  border-radius: 5px 5px 20px 20px;
+  box-shadow: 0 4px 8px 3px darkslategrey;
 }
 
-#screen-wrapper{
-    margin-top: 10px;
-    border: 1px solid rgb(189, 189, 189);
-    width: 100%;
-    height: 130px;
-    border-radius: 10px 10px 80px 80px;
+#screen-wrapper {
+  margin-top: 10px;
+  border: 1px solid rgb(189, 189, 189);
+  width: 100%;
+  height: 130px;
+  border-radius: 10px 10px 80px 80px;
 }
 
-#screen{
-    background-color: rgba(145, 165, 145, 0.425);
-    width: 80%;
-    height: 40px;
-    margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
-    border: 1px solid rgb(138, 138, 138);
-    border-radius: 6px;
-    text-align: right;
-    font-size: 30px;
-    line-height: 38px;
+#screen {
+  position: relative;
+  background-color: rgba(145, 165, 145, 0.425);
+  width: 80%;
+  height: 40px;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid rgb(138, 138, 138);
+  border-radius: 6px;
+  text-align: right;
+  font-size: 30px;
+  line-height: 38px;
 }
 
-#screen-text{
-    margin-right: 4px;
+#screen-text {
+  margin-right: 4px;
 }
 
-#buttons{
-    margin-top: 25px;
-    height: 18em;
-    display: grid;
-    grid-template-rows: repeat(5, 1fr);
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
+#equation {
+  position: absolute;
+  right: 0;
+  bottom: 35px;
+  font-size: medium;
 }
 
-button{
-    background-color: rgba(150, 155, 159, 0.425);
-    border-radius: 10%;
-    font-size: 25px;
-    cursor: pointer;
+#buttons {
+  margin-top: 25px;
+  height: 18em;
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
 }
 
-#clear, .operators{
-    background-color: #d4a064;
+button {
+  background-color: rgba(150, 155, 159, 0.425);
+  border-radius: 10%;
+  font-size: 25px;
+  cursor: pointer;
 }
 
-.pressed-btn{
-    border: none;
-    color: white;
+#clear,
+#divide,
+#multiply,
+#subtract,
+#add {
+  background-color: #d4a064;
+}
+
+button:active {
+  opacity: 0.7;
 }

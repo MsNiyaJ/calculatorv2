@@ -1,20 +1,28 @@
 class ScreenManager {
   screen = document.querySelector("#screen-text");
 
+  constructor() {
+    this.setToZero();
+  }
+
+  setToZero() {
+    this.screenText = "0";
+  }
+
   clear() {
-    this.screen.textContent = "";
+    this.screenText = "";
   }
 
-  append(value) {
-    this.screen.textContent += value;
+  append(buttonText) {
+    this.screenText += buttonText;
   }
 
-  get value() {
+  get screenText() {
     return this.screen.textContent;
   }
 
-  set value(value) {
-    this.screen.textContent = value;
+  set screenText(text) {
+    this.screen.textContent = text;
   }
 }
 
