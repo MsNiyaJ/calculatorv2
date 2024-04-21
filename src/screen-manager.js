@@ -17,6 +17,14 @@ class ScreenManager {
     this.screenText += buttonText;
   }
 
+  get isZero() {
+    return this.screenText === "0";
+  }
+
+  get isMaxedOut() {
+    return this.screenText.length === 20;
+  }
+
   get screenText() {
     return this.screen.textContent;
   }

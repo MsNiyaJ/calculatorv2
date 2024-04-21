@@ -13,7 +13,7 @@ class Button {
 }
 
 class NumberButton extends Button {
-  setupNumbersForCalculation() {
+  addNumbersToEquation() {
     if (!calculator.operation) {
       calculator.setFirstNumber(screenManager.screenText);
     } else {
@@ -21,38 +21,55 @@ class NumberButton extends Button {
     }
   }
 
+  handleScreen() {
+    if (screenManager.isZero) {
+      screenManager.clear();
+    }
+
+    if (!screenManager.isMaxedOut) {
+      screenManager.append(this.value);
+    }
+  }
+
   click() {
-    screenManager.append(this.value);
-    this.setupNumbersForCalculation();
+    this.handleScreen();
+    this.addNumbersToEquation();
   }
 }
 
 class OperationButton extends Button {
+  get operation() {
+    return operations[this.id];
+  }
+
+  // TODO: For square root, negate, and percent, operate immediately and update the screen
+
   click() {
-    // TODO: Set the operation for the calculator
-    console.error("OperationButton not implemented yet", {
-      id: this.id,
-      value: this.value,
-    });
+    calculator.setOperation(this.operation);
+    screenManager.setToZero(); // TODO: fix this. It should only clear the screen if the user is starting a new number
   }
 }
 
 class DecimalButton extends Button {
-  currentNumberHasADecimal() {
+  get currentNumberHasADecimal() {
     return screenManager.screenText.includes(this.value);
   }
 
-  click() {
-    if (!this.currentNumberHasADecimal()) {
+  handleScreen() {
+    if (!this.currentNumberHasADecimal) {
       screenManager.append(this.value);
     }
+  }
+
+  click() {
+    this.handleScreen();
   }
 }
 
 class EqualsButton extends Button {
   click() {
-    // TODO: Calculate the result of the equation and display it on the screen
-    console.error("EqualsButton not implemented yet");
+    const result = calculator.operate();
+    screenManager.screenText = result;
   }
 }
 
@@ -89,6 +106,10 @@ export default class ButtonClickHandler {
   }
 
   click() {
-    this.button ? this.button.click() : console.error("Button type not found");
+    this.button
+      ? this.button.click()
+      : console.error(
+          `Unable to setup click handler. Button type ${type} not found`
+        );
   }
 }
