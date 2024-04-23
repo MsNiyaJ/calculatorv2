@@ -2,11 +2,13 @@ class Calculator {
   firstNumber = 0;
   secondNumber = 0;
   operation = null;
+  result = null;
 
   resetEquation() {
     this.firstNumber = 0;
     this.secondNumber = 0;
     this.operation = null;
+    this.result = null;
   }
 
   setFirstNumber(num) {
@@ -23,7 +25,7 @@ class Calculator {
 
   operate() {
     if (!this.operation) return "Error";
-    return this.operation.apply(this.firstNumber, this.secondNumber);
+    this.result = this.operation.apply(this.firstNumber, this.secondNumber);
   }
 }
 

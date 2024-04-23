@@ -13,7 +13,6 @@ function setupClickListener(calculatorButton) {
   );
 }
 
-// Setup click listeners for all buttons on the calculator
 function addEventListenersToButtons() {
   const calculatorButtons = document.querySelectorAll("button");
   calculatorButtons.forEach((calculatorButton) => {

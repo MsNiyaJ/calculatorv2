@@ -14,14 +14,14 @@ class ScreenManager {
   }
 
   append(buttonText) {
-    this.screenText += buttonText;
+    if (!this.screenHasMaxChars) this.screenText += buttonText;
   }
 
   get isZero() {
     return this.screenText === "0";
   }
 
-  get isMaxedOut() {
+  get screenHasMaxChars() {
     return this.screenText.length === 20;
   }
 
