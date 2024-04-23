@@ -62,25 +62,25 @@ class DecimalButton extends Button {
     return screen.screenText.includes(this.value);
   }
 
-  handleScreen() {
+  updateScreen() {
     if (!this.currentNumberHasADecimal) {
       screen.append(this.value);
     }
   }
 
   click() {
-    this.handleScreen();
+    this.updateScreen();
   }
 }
 
 class EqualsButton extends Button {
-  handleScreen() {
+  updateScreen() {
     screen.screenText = calculator.result;
   }
 
   click() {
     calculator.operate();
-    this.handleScreen();
+    this.updateScreen();
   }
 }
 
