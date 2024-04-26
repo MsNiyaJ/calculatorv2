@@ -12,7 +12,7 @@ class Button {
     this.value = value;
   }
 
-  updateEquation() {
+  updateCurrentNumber() {
     if (!calculator.operation) {
       calculator.setFirstNumber(screen.screenText);
     } else {
@@ -32,10 +32,11 @@ class NumberButton extends Button {
 
   click() {
     this.updateScreen();
-    this.updateEquation();
+    this.updateCurrentNumber();
   }
 }
 
+// manipulates the current number on the screen
 class NumberManipulationButton extends Button {
   get operation() {
     return operations[this.id];
@@ -43,7 +44,7 @@ class NumberManipulationButton extends Button {
 
   click() {
     screen.screenText = this.operation.apply(screen.screenText);
-    this.updateEquation();
+    this.updateCurrentNumber();
   }
 }
 
