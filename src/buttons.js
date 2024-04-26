@@ -2,8 +2,9 @@ import Calculator from "./calculator.js";
 import ScreenManager from "./screen-manager.js";
 import { operations } from "./operations.js";
 
-const calculator = new Calculator();
-const screen = new ScreenManager();
+// Exporting for testing purposes
+export const calculator = new Calculator();
+export const screen = new ScreenManager();
 
 class Button {
   constructor(id, value) {
@@ -135,6 +136,6 @@ export default class ButtonClickHandler {
       this.logTypeError();
     }
 
-    console.log(calculator);
+    // console.log(calculator);
   }
 }

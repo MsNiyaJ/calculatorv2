@@ -1,4 +1,5 @@
 import ButtonClickHandler from "./buttons.js";
+import { runAllTests } from "./tests.js";
 
 function setupCalculatorButtonFunctionality(event) {
   const id = event.target.id;
@@ -25,3 +26,4 @@ function startApp() {
 }
 
 startApp();
+// runAllTests(); // uncomment this line to run tests
