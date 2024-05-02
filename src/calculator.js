@@ -1,4 +1,6 @@
-class Calculator {
+import ScreenManager from "./screen-manager.js";
+
+class Calculator extends ScreenManager {
   firstNumber = 0;
   secondNumber = 0;
   operation = null;
@@ -9,6 +11,14 @@ class Calculator {
     this.secondNumber = 0;
     this.operation = null;
     this.result = null;
+  }
+
+  updateCurrentNumber() {
+    if (!this.operation) {
+      this.setFirstNumber(this.screenText);
+    } else {
+      this.setSecondNumber(this.screenText);
+    }
   }
 
   setFirstNumber(num) {
@@ -26,6 +36,13 @@ class Calculator {
   operate() {
     if (!this.operation) return "Error";
     this.result = this.operation.apply(this.firstNumber, this.secondNumber);
+    this.screenText = this.result;
+  }
+
+  manipulateCurrentNumber(manipulation) {
+    const currentNumber = Number(this.screenText);
+    const manipulatedNumber = manipulation.apply(currentNumber);
+    this.screenText = manipulatedNumber;
   }
 }
 

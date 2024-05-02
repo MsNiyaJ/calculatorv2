@@ -11,14 +11,6 @@ class Button {
     this.id = id;
     this.value = value;
   }
-
-  updateCurrentNumber() {
-    if (!calculator.operation) {
-      calculator.setFirstNumber(screen.screenText);
-    } else {
-      calculator.setSecondNumber(screen.screenText);
-    }
-  }
 }
 
 class NumberButton extends Button {
@@ -32,19 +24,16 @@ class NumberButton extends Button {
 
   click() {
     this.updateScreen();
-    this.updateCurrentNumber();
+    calculator.updateCurrentNumber();
   }
 }
 
-// manipulates the current number on the screen
+// performs an operation on the current number on the screen
 class NumberManipulationButton extends Button {
-  get operation() {
-    return operations[this.id];
-  }
-
   click() {
-    screen.screenText = this.operation.apply(screen.screenText);
-    this.updateCurrentNumber();
+    const manipulation = operations[this.id];
+    calculator.manipulateCurrentNumber(manipulation);
+    calculator.updateCurrentNumber();
   }
 }
 
@@ -76,13 +65,8 @@ class DecimalButton extends Button {
 }
 
 class EqualsButton extends Button {
-  updateScreen() {
-    screen.screenText = calculator.result;
-  }
-
   click() {
     calculator.operate();
-    this.updateScreen();
   }
 }
 

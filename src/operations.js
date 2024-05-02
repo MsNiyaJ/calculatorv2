@@ -18,7 +18,8 @@ class Multiply {
 
 class Divide {
   apply(firstNumber, secondNumber) {
-    if (secondNumber === 0) return "Error";
+    const snarkyErrorMessage = "Go back to school...";
+    if (secondNumber === 0) return snarkyErrorMessage;
     return firstNumber / secondNumber;
   }
 }

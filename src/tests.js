@@ -41,6 +41,18 @@ function testSquareRoot() {
     click("squareRoot");
     expect(screen.screenText).toBe("3");
   });
+
+  test("can get sum of two square roots", () => {
+    click("4");
+    click("squareRoot");
+    expect(screen.screenText).toBe("2");
+    click("add");
+    click("9");
+    click("squareRoot");
+    expect(screen.screenText).toBe("3");
+    click("equals");
+    expect(screen.screenText).toBe("5");
+  });
 }
 
 function testNegate() {
