@@ -15,10 +15,9 @@ class Button {
 
 class NumberButton extends Button {
   updateScreen() {
-    if (screen.isZero) {
+    if (screen.isZero || calculator.isStartingNewNumber) {
       screen.clear();
     }
-
     screen.append(this.value);
   }
 
@@ -42,9 +41,16 @@ class OperationButton extends Button {
     return operations[this.id];
   }
 
+  get equationExists() {
+    return calculator.secondNumber !== 0 && !!calculator.operation;
+  }
+
   click() {
+    if (this.equationExists) {
+      calculator.operateAndStartNewEquation();
+    }
+
     calculator.setOperation(this.operation);
-    screen.setToZero(); // TODO: fix this. It should only clear the screen if the user is starting a new number
   }
 }
 
@@ -54,6 +60,10 @@ class DecimalButton extends Button {
   }
 
   updateScreen() {
+    if (calculator.isStartingNewNumber) {
+      screen.setToZero();
+    }
+
     if (!this.currentNumberHasADecimal) {
       screen.append(this.value);
     }
@@ -61,12 +71,13 @@ class DecimalButton extends Button {
 
   click() {
     this.updateScreen();
+    calculator.updateCurrentNumber();
   }
 }
 
 class EqualsButton extends Button {
   click() {
-    calculator.operate();
+    calculator.operateAndStartNewEquation();
   }
 }
 

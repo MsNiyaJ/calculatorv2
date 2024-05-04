@@ -18,6 +18,7 @@ export function runAllTests() {
   testPercentage();
   testDecimal();
   testMultipleOperations();
+  testChangeOperation();
 
   console.log(`Tests complete. ${passedTests} passed, ${failedTests} failed.`);
 }
@@ -32,6 +33,21 @@ function testDecimal() {
     click("decimal");
     click("decimal");
     expect(screen.screenText).toBe("0.");
+  });
+
+  test("should prepend 0 to decimal for a new number", () => {
+    click("1");
+    click("add");
+    click("decimal");
+    click("2");
+    expect(screen.screenText).toBe("0.2");
+  });
+
+  test("should clear decimal when starting a new number", () => {
+    click("decimal");
+    click("add");
+    click("1");
+    expect(screen.screenText).toBe("1");
   });
 }
 
@@ -62,6 +78,17 @@ function testNegate() {
     click("negate");
     expect(screen.screenText).toBe("-9");
   });
+
+  test("can get difference of two negated numbers", () => {
+    click("9");
+    click("negate");
+    expect(screen.screenText).toBe("-9");
+    click("subtract");
+    click("1");
+    click("negate");
+    click("equals");
+    expect(screen.screenText).toBe("-8");
+  });
 }
 
 function testPercentage() {
@@ -88,6 +115,20 @@ function testAddition() {
     calculator.setSecondNumber("-2");
     click("equals");
     expect(screen.screenText).toBe("7.5");
+  });
+
+  test("can add two decimal numbers", () => {
+    click("1");
+    click("decimal");
+    click("5");
+    expect(screen.screenText).toBe("1.5");
+    calculator.setOperation(operations.add);
+    click("2");
+    click("decimal");
+    click("5");
+    expect(screen.screenText).toBe("2.5");
+    click("equals");
+    expect(screen.screenText).toBe("4");
   });
 }
 
@@ -130,22 +171,12 @@ function testClear() {
   });
 }
 
-/**
- * Your calculator should not evaluate more than a single
- * pair of numbers at a time. Example: you press a number
- * button (12), followed by an operator button (+), a
- * second number button (7), and finally a second operator
- * button (-). Your calculator should then do the following:
- * first, evaluate the first pair of numbers (12 + 7), second,
- * display the result of that calculation (19),
- * and finally, use that result (19) as the first number in
- * your new calculation, along with the next operator (-).
- */
 function testMultipleOperations() {
-  test("can evaluate multiple operations", () => {
+  test("can evaluate multiple operations with equals", () => {
     click("1");
     click("2");
     click("add");
+    expect(screen.screenText).toBe("12");
     click("7");
     click("equals");
     expect(screen.screenText).toBe("19");
@@ -153,6 +184,31 @@ function testMultipleOperations() {
     click("2");
     click("equals");
     expect(screen.screenText).toBe("17");
+  });
+
+  test("can evaluate multiple operations without equals", () => {
+    click("1");
+    click("add");
+    expect(screen.screenText).toBe("1");
+    click("2");
+    click("add");
+    expect(screen.screenText).toBe("3");
+    click("3");
+    click("multiply");
+    click("2");
+    click("equals");
+    expect(screen.screenText).toBe("12");
+  });
+}
+
+function testChangeOperation() {
+  test("can change operation after clicking one", () => {
+    click("7");
+    click("add");
+    click("subtract");
+    click("3");
+    click("equals");
+    expect(screen.screenText).toBe("4");
   });
 }
 
@@ -174,9 +230,7 @@ function test(description, testFunction) {
 
 const expect = (actual) => ({
   toBe: (expected) => {
-    if (actual === expected) {
-      return true;
-    } else {
+    if (actual !== expected) {
       throw Error(`Expected ${expected}, but got ${actual}`);
     }
   },
@@ -186,6 +240,6 @@ function click(buttonId) {
   try {
     document.getElementById(buttonId).click();
   } catch (error) {
-    console.log("Error clicking button: ", buttonId, error);
+    console.log("Error clicking button: ", { buttonId, error });
   }
 }
