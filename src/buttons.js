@@ -15,7 +15,10 @@ class Button {
 
 class NumberButton extends Button {
   updateScreen() {
-    if (screen.isZero || calculator.isStartingNewNumber) {
+    const screenShowsResult =
+      screen.screenText === calculator.result?.toString();
+
+    if (screen.isZero || screenShowsResult || calculator.isStartingNewNumber) {
       screen.clear();
     }
     screen.append(this.value);
@@ -32,7 +35,6 @@ class NumberManipulationButton extends Button {
   click() {
     const manipulation = operations[this.id];
     calculator.manipulateCurrentNumber(manipulation);
-    calculator.updateCurrentNumber();
   }
 }
 

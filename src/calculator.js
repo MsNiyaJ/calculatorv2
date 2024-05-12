@@ -57,6 +57,8 @@ class Calculator extends ScreenManager {
   manipulateCurrentNumber(manipulation) {
     const manipulatedNumber = manipulation.apply(Number(this.currentNumber));
     this.screenText = manipulatedNumber;
+    this.updateCurrentNumber();
+    this.result = manipulatedNumber;
   }
 }
 

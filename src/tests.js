@@ -69,6 +69,17 @@ function testSquareRoot() {
     click("equals");
     expect(screen.screenText).toBe("5");
   });
+
+  test("starts new equation if number is pressed after squareroot", () => {
+    click("9");
+    click("squareRoot");
+    click("1");
+    expect(screen.screenText).toBe("1");
+    click("add");
+    click("2");
+    click("equals");
+    expect(screen.screenText).toBe("3");
+  });
 }
 
 function testNegate() {
@@ -109,7 +120,7 @@ function testNumberButton() {
 }
 
 function testAddition() {
-  test("can add two numbers", () => {
+  test("can add two large numbers", () => {
     calculator.setFirstNumber("9.5");
     calculator.setOperation(operations.add);
     calculator.setSecondNumber("-2");
