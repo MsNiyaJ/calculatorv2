@@ -45,17 +45,16 @@ class Calculator extends ScreenManager {
 
   operateAndStartNewEquation() {
     if (!this.operation) return "Error";
-    const result = this.operation.apply(
-      Number(this.firstNumber),
-      Number(this.secondNumber)
-    );
+
+    const result = this.operation.apply(this.firstNumber, this.secondNumber);
     this.resetEquation();
     this.setFirstNumber(result);
     this.screenText = result;
+    this.result = result;
   }
 
   manipulateCurrentNumber(manipulation) {
-    const manipulatedNumber = manipulation.apply(Number(this.currentNumber));
+    const manipulatedNumber = manipulation.apply(this.currentNumber);
     this.screenText = manipulatedNumber;
     this.updateCurrentNumber();
     this.result = manipulatedNumber;

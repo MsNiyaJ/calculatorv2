@@ -126,6 +126,12 @@ function testAddition() {
     calculator.setSecondNumber("-2");
     click("equals");
     expect(screen.screenText).toBe("7.5");
+
+    calculator.setFirstNumber("22222222222222222222");
+    calculator.setOperation(operations.add);
+    calculator.setSecondNumber("33333333333333333333");
+    click("equals");
+    expect(screen.screenText).toBe("55555555555555555555");
   });
 
   test("can add two decimal numbers", () => {
