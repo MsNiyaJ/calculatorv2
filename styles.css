@@ -16,8 +16,7 @@ body {
 #calculator {
   padding: 10px;
   background-color: rgb(223, 224, 224);
-  min-width: 400px;
-  height: 500px;
+  min-width: 20rem;
   border-radius: 5px 5px 20px 20px;
   box-shadow: 0 4px 8px 3px darkslategrey;
 }
@@ -68,7 +67,7 @@ body {
 button {
   background-color: rgb(189, 186, 180);
   border-radius: 10%;
-  font-size: 25px;
+  font-size: 1.3rem;
   cursor: pointer;
 }
 
@@ -89,4 +88,11 @@ button:active {
 #subtract:focus,
 #add:focus {
   background-color: #87561f;
+}
+
+/** Mobile **/
+@media screen and (max-width: 600px) {
+  #calculator {
+    min-width: 15rem;
+  }
 }
