@@ -19,6 +19,7 @@ export function runAllTests() {
   testDecimal();
   testMultipleOperations();
   testChangeOperation();
+  testScreen();
 
   console.log(`Tests complete. ${passedTests} passed, ${failedTests} failed.`);
 }
@@ -177,6 +178,14 @@ function testDivision() {
     click("equals");
     expect(screen.screenText).toBe("3388");
   });
+
+  test("see snarky error message when dividing by zero", () => {
+    calculator.setFirstNumber("5");
+    calculator.setOperation(operations.divide);
+    calculator.setSecondNumber("0");
+    click("equals");
+    expect(screen.screenText).toBe("Go back to school...");
+  });
 }
 
 function testClear() {
@@ -226,6 +235,36 @@ function testChangeOperation() {
     click("3");
     click("equals");
     expect(screen.screenText).toBe("4");
+  });
+}
+
+function testScreen() {
+  test("can clear screen text", () => {
+    click("clear");
+    expect(screen.screenText).toBe("0");
+  });
+
+  test("can append text to screen", () => {
+    screen.screenText = "123";
+    screen.append("4");
+    expect(screen.screenText).toBe("1234");
+  });
+
+  test("screen wont append if max number of characters", () => {
+    screen.MAX_CHARS;
+    const enteredNumber = "123456789012345";
+    screen.screenText = enteredNumber;
+    screen.append("6");
+    expect(screen.screenText).toBe(enteredNumber);
+  });
+
+  test("results are formatted to scientific notion if large", () => {
+    calculator.setFirstNumber("123456789012345");
+    calculator.setOperation(operations.multiply);
+    calculator.setSecondNumber("2328942842.3892");
+    click("equals");
+    const isScientificNotation = screen.screenText.includes("e+");
+    expect(isScientificNotation).toBe(true);
   });
 }
 

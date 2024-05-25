@@ -26,7 +26,7 @@ class Multiply {
 class Divide {
   apply(firstNumber, secondNumber) {
     const snarkyErrorMessage = "Go back to school...";
-    if (secondNumber === 0) return snarkyErrorMessage;
+    if (secondNumber == 0) return snarkyErrorMessage;
 
     const num1 = new Decimal(firstNumber);
     const num2 = new Decimal(secondNumber);

@@ -43,21 +43,33 @@ class Calculator extends ScreenManager {
     this.operation = operation;
   }
 
+  formatResult(result) {
+    const isLargeNumber = result.toString().length > this.MAX_CHARS;
+    const isString = typeof result === "string";
+    if (isLargeNumber && !isString) {
+      return result.toPrecision(this.MAX_CHARS);
+    }
+
+    return result;
+  }
+
   operateAndStartNewEquation() {
     if (!this.operation) return "Error";
 
     const result = this.operation.apply(this.firstNumber, this.secondNumber);
+    const formattedResult = this.formatResult(result);
     this.resetEquation();
-    this.setFirstNumber(result);
-    this.screenText = result;
-    this.result = result;
+    this.setFirstNumber(Number(formattedResult) || 0);
+    this.screenText = formattedResult;
+    this.result = formattedResult;
   }
 
   manipulateCurrentNumber(manipulation) {
     const manipulatedNumber = manipulation.apply(this.currentNumber);
-    this.screenText = manipulatedNumber;
+    const formattedResult = this.formatResult(manipulatedNumber);
+    this.screenText = formattedResult;
     this.updateCurrentNumber();
-    this.result = manipulatedNumber;
+    this.result = this.formatResult(formattedResult);
   }
 }
 

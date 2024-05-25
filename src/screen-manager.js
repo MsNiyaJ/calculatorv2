@@ -1,5 +1,6 @@
 class ScreenManager {
   screen = document.querySelector("#screen-text");
+  MAX_CHARS = 15;
 
   constructor() {
     this.setToZero();
@@ -22,7 +23,7 @@ class ScreenManager {
   }
 
   get screenHasMaxChars() {
-    return this.screenText.length === 20;
+    return this.screenText.length === this.MAX_CHARS;
   }
 
   get screenText() {
