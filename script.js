@@ -1,5 +1,5 @@
-import ButtonClickHandler from "./buttons.js";
-import { runAllTests } from "./tests.js";
+import ButtonClickHandler from "./src/buttons.js";
+import { runAllTests } from "./src/tests.js";
 
 function setupCalculatorButtonFunctionality(event) {
   const id = event.target.id;
